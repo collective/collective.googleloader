@@ -12,5 +12,5 @@ class TestSetup(unittest.TestCase):
         resources = jsregistry.resources
         self.failUnless(resources[0].getId().startswith('https://www.google.com/jsapi?key='))
         self.failUnless(resources[1].getId()=='googleloader.js')
-        googleload = portal.restrictedTraverse('googleload.js')()
-        self.failUnless(not bool(googload))
+        googleload = portal.restrictedTraverse('googleloader.js')()
+        self.failUnless(not bool(googleload))
