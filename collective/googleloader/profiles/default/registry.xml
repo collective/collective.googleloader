@@ -1,0 +1,8 @@
+<registry>
+  <records interface="collective.googleloader.interfaces.IGoogleLoaderSettings"/>
+  <record name="collective.googleloader.interfaces.IGoogleLoaderSettings.api_keys">
+    <value>
+        <element>http://localhost:8080 | ABQIAAAAaKes6QWqobpCx2AOamo-shTwM0brOpm-All5BF6PoaKBxRWWERSUWbHs4SIAMkeC1KV98E2EdJKuJw</element>
+    </value>
+  </record>
+</registry>
