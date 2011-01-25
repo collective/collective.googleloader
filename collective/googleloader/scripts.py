@@ -17,18 +17,24 @@ def get_resource_id(api_key):
 def handleRegistryModified(settings, event):
     #FIRST: remove old resource
     oldjsapi = None
+
     if event.record.fieldName == 'api_keys':
         unregisterJSAPI(event.oldValue)
         registerJSAPI(settings.api_keys)
-    if event.record.fieldName == 'load_jquery':
+
+    elif event.record.fieldName == 'load_jquery':
+
         if settings.load_jquery:
             deactivatePloneJQuery()
         else:
             activatePloneJQuery()
 
+    cookResources()
+
 def unregisterJSAPI(api_keys):
     site = getSite()
     jsregistry = site.portal_javascripts
+
     if type(api_keys) is not dict:
         api_keys = get_api_keys(raw=api_keys)
 
@@ -50,6 +56,7 @@ def registerJSAPI(api_keys):
               'authenticated':False,
               'inline':False,
               'compression':None}
+
     for host in api_keys:
         resource_id = get_resource_id(api_keys[host])
         kwargs = base_kwargs.copy()
@@ -59,6 +66,7 @@ def registerJSAPI(api_keys):
 
 def get_api_keys(raw=None):
     """Return api keys as dict"""
+
     if raw is not None:
         api_keys = raw
     else:
@@ -83,7 +91,7 @@ class LoadJQuery(BrowserView):
         registry = component.getUtility(IRegistry).forInterface(interfaces.IGoogleLoaderSettings)
         
         if registry.load_jquery:
-            return "google.load('jquery','1.4.4')"
+            return "google.load('jquery','%s')"%registry.jquery_version
         return ''
 
 def activatePloneJQuery():
@@ -98,4 +106,9 @@ def deactivatePloneJQuery():
     jsregistry = site.portal_javascripts
     jquery = jsregistry.getResource('jquery.js')
     jquery.setEnabled(False)
+    jsregistry.cookResources()
+
+def cookResources():
+    site = getSite()
+    jsregistry = site.portal_javascripts
     jsregistry.cookResources()

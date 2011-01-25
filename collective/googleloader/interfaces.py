@@ -12,3 +12,5 @@ class IGoogleLoaderSettings(interface.Interface):
 
     load_jquery = schema.Bool(title=u"load jquery on google cdn",
                                  default=False)
+
+    jquery_version = schema.ASCIILine(title=u"version", default="1.4.4")
