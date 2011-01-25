@@ -9,8 +9,3 @@ class IGoogleLoaderSettings(interface.Interface):
     
     api_keys = schema.List(title=u"api keys",
                            value_type=schema.ASCIILine(title=u"api key"))
-
-    load_jquery = schema.Bool(title=u"load jquery on google cdn",
-                                 default=False)
-
-    jquery_version = schema.ASCIILine(title=u"version", default="1.4.4")

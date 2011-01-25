@@ -22,15 +22,6 @@ def handleRegistryModified(settings, event):
         unregisterJSAPI(event.oldValue)
         registerJSAPI(settings.api_keys)
 
-    elif event.record.fieldName == 'load_jquery':
-
-        if settings.load_jquery:
-            deactivatePloneJQuery()
-        else:
-            activatePloneJQuery()
-
-    cookResources()
-
 def unregisterJSAPI(api_keys):
     site = getSite()
     jsregistry = site.portal_javascripts
@@ -80,35 +71,3 @@ def get_api_keys(raw=None):
             res[value[0].strip()] = value[1].strip()
 
     return res
-
-class LoadJQuery(BrowserView):
-    """generate javascript loader script"""
-
-    def __call__(self, *args, **kwargs):
-        return self.get_script()
-
-    def get_script(self):
-        registry = component.getUtility(IRegistry).forInterface(interfaces.IGoogleLoaderSettings)
-        
-        if registry.load_jquery:
-            return "google.load('jquery','%s')"%registry.jquery_version
-        return ''
-
-def activatePloneJQuery():
-    site = getSite()
-    jsregistry = site.portal_javascripts
-    jquery = jsregistry.getResource('jquery.js')
-    jquery.setEnabled(True)
-    jsregistry.cookResources()
-
-def deactivatePloneJQuery():
-    site = getSite()
-    jsregistry = site.portal_javascripts
-    jquery = jsregistry.getResource('jquery.js')
-    jquery.setEnabled(False)
-    jsregistry.cookResources()
-
-def cookResources():
-    site = getSite()
-    jsregistry = site.portal_javascripts
-    jsregistry.cookResources()

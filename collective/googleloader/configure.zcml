@@ -16,14 +16,8 @@
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
   
-    <include package="plone.app.registry"/>
+  <include package="plone.app.registry"/>
 
-    <browser:page
-      name="loadjquery.js"
-      for="*"
-      class=".scripts.LoadJQuery"
-      permission="zope2.View"
-      />
   <subscriber handler=".scripts.handleRegistryModified" />
 
 </configure>
