@@ -19,9 +19,9 @@
     <include package="plone.app.registry"/>
 
     <browser:page
-      name="googleloader.js"
+      name="loadjquery.js"
       for="*"
-      class=".scripts.LoaderScript"
+      class=".scripts.LoadJQuery"
       permission="zope2.View"
       />
   <subscriber handler=".scripts.handleRegistryModified" />
