@@ -22,7 +22,7 @@ into your Zope instance.
 
     <include package="collective.googleloader" />
 
-.. _pythonproducts: http://plone.org/products/pythonproducts
+.. _pythonproducts: https://plone.org/products/pythonproducts
 
 
 Alternatively, if you are using zc.buildout and the plone.recipe.zope2instance
